@@ -10,6 +10,7 @@ import Detail from './Detail';
 
 function App() {
   let [shoes, shoes변경] = useState(Data);
+  
 
   return (
     <div className="App">
@@ -17,8 +18,8 @@ function App() {
     <Container>
     <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
     <Nav className="me-auto">
-      <Nav.Link><Link to="/">Home</Link></Nav.Link>
-      <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
+      <Nav.Link as={Link} to="/">Home</Nav.Link>
+      <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
       <Nav.Link >Pricing</Nav.Link>
     </Nav>
     </Container>
@@ -54,7 +55,7 @@ function App() {
 
 {/* :id는 아무단어나 쳤을때 보여주는 곳 */}
 
-  <Route  path="/">
+  <Route exact path="/">
   <div>아무거나 적었을때</div>
   </Route>
     </Switch>
