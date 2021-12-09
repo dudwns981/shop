@@ -1,30 +1,35 @@
 // eslint-disable
-
-
 import './App.css';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav, Navbar, Container,Button} from 'react-bootstrap';
 import Data from './data.js';
 import Price__list from './Price__list';
+import {Link, Route, Switch} from 'react-router-dom'
+import Detail from './Detail';
 
 function App() {
   let [shoes, shoes변경] = useState(Data);
 
   return (
     <div className="App">
-  <Navbar bg="primary" variant="dark">
+  <Navbar bg="secondary" variant="dark">
     <Container>
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
     <Nav className="me-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
+      <Nav.Link><Link to="/">Home</Link></Nav.Link>
+      <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
+      <Nav.Link >Pricing</Nav.Link>
     </Nav>
     </Container>
   </Navbar>
 
   
+  {/* switch는 컴포넌트가 중복매칭 되는것을 피하기 위해서, switch 내에서는 중복매칭이 발생하지 않는다 */}
+
+  <Switch>
+  
+  <Route exact path="/">
   <div className="background">
   <h1>20% Season Off </h1>
   <p>
@@ -35,49 +40,26 @@ function App() {
     <Button variant="primary">Learn more</Button>
   </p>
   </div>
-  
     <div className="container">
-
-    <div className="row" >
-    {shoes.map((a,i)=>{
-      return(
-
-      <Price__list shoes={a}/>
-
-        // <Price__list img={a.img} id={a.id} 상품명={a.title} 가격설명={a.content, a.price}/>
-        // <Price__list shoes={shoes[i]}/>
-      );
-    })}
-    </div>
-
-{/*  반복문전 데이터 */}
-      {/* <div className="row">
-
-        <div className="col-md-4"><img src="https://codingapple1.github.io/shop/shoes1.jpg " width="100%"></img>
-        <h4>{shoes[1].title}</h4>
-        <p>{shoes[1].price}원</p>
+        <div className="row">
+            {shoes.map((a,i)=>{ return(
+            <Price__list shoes={a} i={i} key={i}/>
+            ); })}
         </div>
+    </div>
+  </Route>
+    <Route path="/detail/:id">
+      <Detail shoes={shoes}/> 
+  </Route>
 
-      <Price__list img={"https://codingapple1.github.io/shop/shoes2.jpg"} 상품명={shoes[2].title} 가격설명={shoes[2].price} />
+{/* :id는 아무단어나 쳤을때 보여주는 곳 */}
 
+  <Route  path="/">
+  <div>아무거나 적었을때</div>
+  </Route>
+    </Switch>
 
-
-        <div className="col-md-4"><img src="https://codingapple1.github.io/shop/shoes3.jpg"  width="100%"></img>
-        <h4>상품명</h4>
-        <p>상품설명 & 가격</p></div>
-
-      </div> */}
-      
-      </div>
-
-    
   
-
-
-
-
-    
-
     </div>
   );
 }
