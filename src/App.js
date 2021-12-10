@@ -5,12 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav, Navbar, Container,Button} from 'react-bootstrap';
 import Data from './data.js';
 import Price__list from './Price__list';
-import {Link, Route, Switch} from 'react-router-dom'
+import {Link, Route, Switch} from 'react-router-dom';
 import Detail from './Detail';
+import axios from 'axios';
 
 function App() {
   let [shoes, shoes변경] = useState(Data);
-  
+  let [server, serverSet] = useState('')
+  // const beta = [{12},{43}];
 
   return (
     <div className="App">
@@ -46,8 +48,36 @@ function App() {
             {shoes.map((a,i)=>{ return(
             <Price__list shoes={a} i={i} key={i}/>
             ); })}
+            
+
         </div>
+        <div className="row">
+          { typeof server === 'string' ? null : server.map((a,i)=>{return(
+            <Price__list shoes={a} i={i} key={i}/>
+          )})
+          
+          }
+        </div>
+        <button className="btn btn-primary" onClick={()=>{
+          axios.get('https://codingapple1.github.io/shop/data2.json')
+          .then((result)=>{
+            serverSet(result.data);
+            console.log(server)
+          })
+          .catch(()=>{
+            console.log("실패했어요")
+          })
+
+        }}>더보기</button>
+
+        {/* {beta.map((a)=>{
+          return (
+            <div>abc</div>
+          )
+        })} */}
     </div>
+
+    
   </Route>
     <Route path="/detail/:id">
       <Detail shoes={shoes}/> 
