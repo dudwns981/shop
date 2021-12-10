@@ -12,6 +12,7 @@ import axios from 'axios';
 function App() {
   let [shoes, shoes변경] = useState(Data);
   let [server, serverSet] = useState('')
+  let [visible,setVisible] = useState(true)
   // const beta = [{12},{43}];
 
   return (
@@ -56,9 +57,10 @@ function App() {
             <Price__list shoes={a} i={i} key={i}/>
           )})
           
+          
           }
         </div>
-        <button className="btn btn-primary" onClick={()=>{
+        <button style={typeof server === 'string' ? null : {display:'none'}} className="btn btn-primary" onClick={()=>{
           axios.get('https://codingapple1.github.io/shop/data2.json')
           .then((result)=>{
             serverSet(result.data);
@@ -67,14 +69,11 @@ function App() {
           .catch(()=>{
             console.log("실패했어요")
           })
+          
 
         }}>더보기</button>
 
-        {/* {beta.map((a)=>{
-          return (
-            <div>abc</div>
-          )
-        })} */}
+        
     </div>
 
     
