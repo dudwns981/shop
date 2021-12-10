@@ -89,6 +89,7 @@ function App() {
 
     
   </Route>
+  
     <Route path="/detail/:id">
       <Detail shoes={shoes}/> 
   </Route>
