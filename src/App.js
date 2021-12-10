@@ -11,7 +11,8 @@ import axios from 'axios';
 
 function App() {
   let [shoes, shoes변경] = useState(Data);
-  let [server, serverSet] = useState('')
+  let [load , loadSet] = useState(false);
+
   // const beta = [{12},{43}];
 
   return (
@@ -51,22 +52,31 @@ function App() {
             
 
         </div>
-        <div className="row">
-          { typeof server === 'string' ? null : server.map((a,i)=>{return(
-            <Price__list shoes={a} i={i} key={i}/>
-          )})
-          
-          }
-        </div>
+          {load === true ? <Loading/> : null}
+      
+
+
+
         <button className="btn btn-primary" onClick={()=>{
-          axios.get('https://codingapple1.github.io/shop/data2.json')
+
+          // 로딩중이라는 UI 띄우기
+          loadSet(true);
+          setTimeout(() => {
+            axios.get('https://codingapple1.github.io/shop/data2.json')
           .then((result)=>{
-            serverSet(result.data);
-            console.log(server)
+            // 로딩중 Ui 삭제
+            loadSet(false);
+            shoes변경([...shoes, ...result.data])
           })
           .catch(()=>{
+            loadSet(false);
+            // 로딩중 Ui 삭제
             console.log("실패했어요")
           })
+            
+          }, 3000);
+
+          
 
         }}>더보기</button>
 
@@ -96,3 +106,14 @@ function App() {
 }
 
 export default App;
+
+
+
+function Loading (){
+  return(
+    <>
+    <div>로딩중입니다!</div>
+    <h3>안녕하세요!</h3>
+    </>
+  )
+}
