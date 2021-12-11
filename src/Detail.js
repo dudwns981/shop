@@ -21,11 +21,20 @@ function Detail(props) {
   const fade = (a)=>{
     viewChange(a)
   }
+  
+  function 재고감소(){
+    let newStock = [... props.재고];
+    newStock[아이디.id] --;
+    props.재고변경(newStock);
+  }
 
+
+  
+  console.log("재고출력" + props.재고)
   // detail이 업데이트 되거나 렌더링이 될때 실행
   useEffect(()=>{
   let timer = setTimeout(() => {
-      fade(false) },2000);
+      fade(false) },1000);
     console.log("출력시작")
 
     // 컴포넌트가 사라질때 특정코드를 실행
@@ -49,6 +58,10 @@ function Detail(props) {
 
   const list = props.shoes;
   const 아이디= list.find(v=>v.id ===parseInt({id}.id));
+
+// 재고사본만들기
+
+
 
 	return (
     
@@ -88,7 +101,14 @@ function Detail(props) {
           <h4 className="pt-5">{props.shoes[아이디.id].title}</h4>
           <p>{props.shoes[아이디.id].content}</p>
           <p>{props.shoes[아이디.id].price}</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <Inventory 재고={props.재고} id={아이디.id}/>
+          
+        
+
+          <button className="btn btn-danger" onClick={()=>{
+           재고감소()
+}
+          }>주문하기</button> 
           <button className="btn btn-danger" onClick={()=>{
             history.goBack(); //경로로 이동 history.push('/경로')
           }}>뒤로가기</button> 
@@ -100,3 +120,14 @@ function Detail(props) {
 }
 
 export default Detail
+
+function Inventory (props) {
+  // console.log(props.재고)
+  return (
+    <div className="inventory">
+      재고:{props.재고[props.id]}
+
+    </div>
+    
+  )
+}

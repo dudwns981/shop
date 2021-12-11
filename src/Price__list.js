@@ -1,8 +1,5 @@
 import {Link, Route, Switch} from 'react-router-dom';
 
-
-
-
 function Price__list(props) {
     return (
         <div className="col-md-4" id={props.shoes.id}>

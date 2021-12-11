@@ -9,13 +9,20 @@ import {Link, Route, Switch} from 'react-router-dom';
 import Detail from './Detail';
 import axios from 'axios';
 
+
+// 중요한 데이터는 상위 데이터에 보관하는 것이 중요; (관습) 
 function App() {
   let [shoes, shoes변경] = useState(Data);
   let [load , loadSet] = useState(false);
+  let [재고,재고변경] = useState([10,11,12,13,14,15]);
+
+  
+  
 
   // const beta = [{12},{43}];
 
   return (
+    
     <div className="App">
   <Navbar bg="secondary" variant="dark">
     <Container>
@@ -74,12 +81,12 @@ function App() {
             console.log("실패했어요")
           })
             
-          }, 3000);
+          }, 1000);
 
           
 
         }}>더보기</button>
-
+      
         {/* {beta.map((a)=>{
           return (
             <div>abc</div>
@@ -91,7 +98,7 @@ function App() {
   </Route>
   
     <Route path="/detail/:id">
-      <Detail shoes={shoes}/> 
+      <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} / > 
   </Route>
 
 {/* :id는 아무단어나 쳤을때 보여주는 곳 */}
