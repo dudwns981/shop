@@ -1,7 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {useHistory, useParams} from 'react-router-dom'
 import styled from 'styled-components' 
 import './Detail.scss'
+import {재고cc} from './App.js'
+import { Nav, Link,Navbar, Container,Button} from 'react-bootstrap';
+import {CSSTransition} from "react-transition-group";
+// import { FALSE } from 'node-sass'
 let 박스 = styled.div`
   padding : 30px;
   font
@@ -13,10 +17,14 @@ let 제목 = styled.h4`
 `
 
 
+
 function Detail(props) {
 
   let [view,viewChange] = useState(true)
   let [inputData, inputData변경] = useState('')
+  // tap 기능 만들기
+  let [tap, tapSet] = useState(0);
+  let [스위치, 스위치변경] = useState(false)
 
   const fade = (a)=>{
     viewChange(a)
@@ -61,6 +69,13 @@ function Detail(props) {
 
 // 재고사본만들기
 
+let 재고 = useContext(재고cc)
+console.log(재고)
+
+
+
+
+
 
 
 	return (
@@ -102,6 +117,7 @@ function Detail(props) {
           <p>{props.shoes[아이디.id].content}</p>
           <p>{props.shoes[아이디.id].price}</p>
           <Inventory 재고={props.재고} id={아이디.id}/>
+          <p>남은재고 : {재고[아이디.id]}</p>
           
         
 
@@ -114,12 +130,55 @@ function Detail(props) {
           }}>뒤로가기</button> 
         </div>
       </div>
-</div> 
+
+        <Nav className="mt-5" variant="tabs" defaultActiveKey="/link-0">
+      <Nav.Item>
+        <Nav.Link onClick={()=>{tapSet(0);스위치변경(false)}} eventKey="link-0">
+          0번째 내용 
+        </Nav.Link >
+      </Nav.Item>
+
+      <Nav.Item>
+        <Nav.Link onClick={()=>{tapSet(1); 스위치변경(false)}} eventKey="link-1" >
+          1번째 내용
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link onClick={()=>{tapSet(2)}} eventKey="link-2" >
+          2번째 내용
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+    {/* css 트렌지션 애니메이션 세팅법 */}
+          <CSSTransition in={스위치} classNames="wow" timeout={500}>
+          <TabContent tap={tap} 스위치변경={스위치변경}></TabContent>
+          </CSSTransition>
+      
+</div>  
 		</div>
 	)
 }
 
 export default Detail
+
+// if문이 여러개일때는 컴포넌트로 만들기
+function TabContent(props){
+
+    useEffect(()=>{
+      props.스위치변경(true);
+    })
+  if(props.tap===0){
+    return <div>0번째 내용입니다.</div>
+} else if(props.tap===1){
+    return <div>1번째 내용입니다.</div>
+
+} else if (props.tap===2){
+    return <div>2번째 내용입니다.</div>
+}
+  
+}
+
+
 
 function Inventory (props) {
   // console.log(props.재고)

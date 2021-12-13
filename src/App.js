@@ -1,6 +1,9 @@
 // eslint-disable
+
+
+import React, { useContext } from 'react';
 import './App.css';
-import { useState } from 'react';
+import { useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav, Navbar, Container,Button} from 'react-bootstrap';
 import Data from './data.js';
@@ -8,7 +11,11 @@ import Price__list from './Price__list';
 import {Link, Route, Switch} from 'react-router-dom';
 import Detail from './Detail';
 import axios from 'axios';
+export let 재고cc = React.createContext();
 
+
+// 같은 값을 공유하는 범위
+// let 재고cc = React.createContext();
 
 // 중요한 데이터는 상위 데이터에 보관하는 것이 중요; (관습) 
 function App() {
@@ -49,16 +56,23 @@ function App() {
   </p>
   <p>
     <Button variant="primary">Learn more</Button>
+    {/* <재고cc.Provider value={재고}> */}
+    <임시파일></임시파일>
+    {/* </재고cc.Provider> */}
   </p>
   </div>
+  <재고cc.Provider value={재고}>
+
     <div className="container">
         <div className="row">
             {shoes.map((a,i)=>{ return(
+
             <Price__list shoes={a} i={i} key={i}/>
             ); })}
-            
+
 
         </div>
+
           {load === true ? <Loading/> : null}
       
 
@@ -93,12 +107,17 @@ function App() {
           )
         })} */}
     </div>
+    </재고cc.Provider>
+
 
     
   </Route>
   
     <Route path="/detail/:id">
+      <재고cc.Provider value={재고}>
       <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} / > 
+      </재고cc.Provider>
+
   </Route>
 
 {/* :id는 아무단어나 쳤을때 보여주는 곳 */}
@@ -117,11 +136,22 @@ export default App;
 
 
 
+
 function Loading (){
   return(
     <>
     <div>로딩중입니다!</div>
     <h3>안녕하세요!</h3>
     </>
+  )
+}
+
+function 임시파일 ( ){
+  let 재고 = useContext(재고cc);
+  return(
+    <div>
+      <p style={{fontSize : "30px"}}>메인페이지화면</p>
+      <p>{재고}</p>
+    </div>
   )
 }
