@@ -11,6 +11,8 @@ import Price__list from './Price__list';
 import {Link, Route, Switch} from 'react-router-dom';
 import Detail from './Detail';
 import axios from 'axios';
+import Cart from './Cart';
+import Test from './Test';
 export let 재고cc = React.createContext();
 
 
@@ -34,10 +36,13 @@ function App() {
   <Navbar bg="secondary" variant="dark">
     <Container>
     <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
-    <Nav className="me-auto">
+        <Nav className="me-auto">
       <Nav.Link as={Link} to="/">Home</Nav.Link>
       <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
-      <Nav.Link >Pricing</Nav.Link>
+      <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
+      <Nav.Link as={Link} to="/test">test</Nav.Link>
+
+
     </Nav>
     </Container>
   </Navbar>
@@ -56,17 +61,17 @@ function App() {
   </p>
   <p>
     <Button variant="primary">Learn more</Button>
-    {/* <재고cc.Provider value={재고}> */}
-    <임시파일></임시파일>
-    {/* </재고cc.Provider> */}
+    
   </p>
   </div>
   <재고cc.Provider value={재고}>
 
     <div className="container">
         <div className="row">
-            {shoes.map((a,i)=>{ return(
-
+            {shoes.map((a,i)=>{ 
+              console.log( a)
+              return(
+            
             <Price__list shoes={a} i={i} key={i}/>
             ); })}
 
@@ -120,6 +125,12 @@ function App() {
 
   </Route>
 
+    <Route path="/cart">
+      <Cart></Cart>
+    </Route>
+    <Route path="/test">
+      <Test></Test>
+    </Route>
 {/* :id는 아무단어나 쳤을때 보여주는 곳 */}
 
   <Route exact path="/">
@@ -146,12 +157,3 @@ function Loading (){
   )
 }
 
-function 임시파일 ( ){
-  let 재고 = useContext(재고cc);
-  return(
-    <div>
-      <p style={{fontSize : "30px"}}>메인페이지화면</p>
-      <p>{재고}</p>
-    </div>
-  )
-}
