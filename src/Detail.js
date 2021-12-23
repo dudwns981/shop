@@ -5,6 +5,7 @@ import './Detail.scss'
 import {재고cc} from './App.js'
 import { Nav, Link,Navbar, Container,Button} from 'react-bootstrap';
 import {CSSTransition} from "react-transition-group";
+import {connect} from 'react-redux'
 // import { FALSE } from 'node-sass'
 let 박스 = styled.div`
   padding : 30px;
@@ -20,15 +21,13 @@ let 제목 = styled.h4`
 
 function Detail(props) {
 
-  let [view,viewChange] = useState(true)
+  let [view, viewChange] = useState(true)
   let [inputData, inputData변경] = useState('')
   // tap 기능 만들기
   let [tap, tapSet] = useState(0);
   let [스위치, 스위치변경] = useState(false)
 
-  const fade = (a)=>{
-    viewChange(a)
-  }
+
   
   function 재고감소(){
     let newStock = [... props.재고];
@@ -38,15 +37,15 @@ function Detail(props) {
 
 
   
-  console.log("재고출력" + props.재고)
+  // console.log("재고출력" + props.재고)
   // detail이 업데이트 되거나 렌더링이 될때 실행
   useEffect(()=>{
   let timer = setTimeout(() => {
-      fade(false) },1000);
-    console.log("출력시작")
+      viewChange(false) },5000);
+    // console.log("출력시작")
 
     // 컴포넌트가 사라질때 특정코드를 실행
-    return () =>{clearTimeout(timer); console.log("페이지변경")}
+    return () =>{clearTimeout(timer); }
 
     // view가 변경될때만 state가 변경됨 [여러개 넣기 가능]
     // [] 빈칸이라면 페이지가 최초 렌더링 될때만 사용됨
@@ -66,12 +65,10 @@ function Detail(props) {
 
   const list = props.shoes;
   const 아이디= list.find(v=>v.id ===parseInt({id}.id));
-
 // 재고사본만들기
 
 let 재고 = useContext(재고cc)
-console.log(재고)
-
+// console.log(재고)
 
 
 
@@ -85,29 +82,22 @@ console.log(재고)
         <박스>
         <제목 className="red">상세페이지</제목>
         </박스>
-    {inputData}
-    <input onChange={(e)=>{inputData변경(e.target.value)}}/>
+        {/* input 박스  */}
+    {/* <div>{inputData}</div>
+    <input onChange={(e)=>{console.log(e); inputData변경(e.target.value)}}/> */}
 
 
 
-
+{/*    재고임박박스 */}
       {view === true 
       ? <div className="my-alert2">
         <p>재고가 얼마 남지 않았습니다.</p>
         </div>
-      : null }
+      : null }  
       
 
       <div className="row">
         <div className="col-md-6">
-
-
-        {/* {console.log(props.shoes[0].id === parseInt({id}.id))} */}
-        {/* {console.log(props.shoes[0].id)}; */}
-        {/* {console.log({id})} */}
-        {/* {console.log({id1})} */}
-
-
           <img src={`https://codingapple1.github.io/shop/shoes${아이디.id +1}.jpg`}
           
           width="100%" />
@@ -120,11 +110,16 @@ console.log(재고)
           <p>남은재고 : {재고[아이디.id]}</p>
           
         
-
+ 
           <button className="btn btn-danger" onClick={()=>{
-           재고감소()
-}
-          }>주문하기</button> 
+           재고감소();
+           props.dispatch({type : '항목추가',
+            payload:{id:props.shoes[아이디.id].id + 1,
+                     name:props.shoes[아이디.id].title
+                     ,quan:1}});
+           history.push('/cart');
+            }}>주문하기</button> 
+
           <button className="btn btn-danger" onClick={()=>{
             history.goBack(); //경로로 이동 history.push('/경로')
           }}>뒤로가기</button> 
@@ -159,7 +154,7 @@ console.log(재고)
 	)
 }
 
-export default Detail
+
 
 // if문이 여러개일때는 컴포넌트로 만들기
 function TabContent(props){
@@ -189,4 +184,18 @@ function Inventory (props) {
     </div>
     
   )
+}
+
+export default connect(stateProps)(Detail)
+
+// redux 설치
+function stateProps(state){
+	// console.log(state);
+	return {
+		
+		state : state.reducer,
+		alert보기 : state.reducer2
+		
+	
+	}
 }
