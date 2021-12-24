@@ -68,15 +68,14 @@ function App() {
               <div className="row">
                 {shoes.map((a,i) => {return <Price__list shoes={a} i={i} key={i} />})}
               </div>
-
+                {/* 로딩중 UI  */}
               {load === true ? <Loading /> : null}
               <button className="btn btn-primary" onClick={() => {
-                  // 로딩중이라는 UI 띄우기
                   loadSet(true);
+                  // axios 사용 데이터 불러오기
                   setTimeout(() => {
-                    axios.get("https://codingapple1.github.io/shop/data2.json").then((result) => { // 로딩중 Ui 삭제
+                    axios.get("https://codingapple1.github.io/shop/data2.json").then((result) => {
                         loadSet(false);
-                        // console.log(result.data);
                         shoes변경([...shoes, ...result.data]);
                       })
                       // axios 에러처리

@@ -116,7 +116,7 @@ let 재고 = useContext(재고cc)
            props.dispatch({type : '항목추가',
             payload:{id:props.shoes[아이디.id].id + 1,
                      name:props.shoes[아이디.id].title
-                     ,quan:1}});
+                     ,quan:1,price:props.shoes[아이디.id].price}});
            history.push('/cart');
             }}>주문하기</button> 
 

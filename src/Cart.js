@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Table} from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
@@ -9,8 +9,8 @@ function Cart(props) {
 	console.log("aaa"+alert);
 	console.log(state);
 	let dispatch =  useDispatch();
-
-	// console.log("출력" +  props.안녕)
+	const totalprice = state.map(a => a.price*a.quan).reduce((prev,curr)=>prev+curr,0);
+	const totalquan = state.map(a => a.quan).reduce((prev,curr)=>prev+curr,0);
 	return (
 		<div>
 			<div>
@@ -19,64 +19,77 @@ function Cart(props) {
       <tr>
         <th>상품번호</th>
         <th>상품명</th>
+				<th>가격</th>
         <th>수량</th>
-        <th>변경</th>
+        <th>총합계</th>
         
       </tr>
     </thead>
     <tbody>
 			{state.map((a,i)=>{
+				console.log("Aaaa" + a.price)
+				console.log("AA" + a.quan)
+				// const total = a.price * a.quan;
+				// const result = total.reduce((prev,curr)=>{prev + curr,0});
+				// console.log(result);
 				return(
 				<tr key={i}>
+					
 					<td>{a.id}</td>
 					<td>{a.name}</td>
-					<td>{a.quan}</td>
+					<td>{a.price}</td>
+					<td>{a.quan}
+					<button onClick={()=>{dispatch({type: '수량증가', payload:{id:a.id, quan:a.quan}})}}>+</button>
+					<button onClick={()=>{dispatch({type: '수량감소', payload:{id:a.id, quan:a.quan}})}}>-</button></td>
 					<td>
-						<button onClick={()=>{dispatch({type: '수량증가', payload:{id:a.id, quan:a.quan}})}}>+</button>
-						<button onClick={()=>{dispatch({type: '수량감소', payload:{id:a.id, quan:a.quan}})}}>-</button>
+						{a.quan * a.price}
 					</td>
 					<td>
 						<button onClick={()=>{
 							dispatch({type:'주문취소',payload:{id:a.id}})
-						}}>주문취소</button>
+						}}>{
+							
+						}
+						주문취소</button>
 					</td>
-					
 				</tr>
 				)
 			})}
-    
+  
    
     </tbody>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>총개수</td>
+				<td>총합계</td>
+				<td></td>
+				
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{totalquan}</td>
+				<td>{totalprice}원</td>
+				<td><button>주문하기</button></td>
+				
+			</tr>
+		</tbody>
   </Table>
 	{alert === true ? 
 		<div className='my-alert2'>
-			<p>지금 구매하시면 신규할인 20%</p>
+			<p>지금 구매하시면 신규할인 20% </p>
+		
 			<button onClick={()=>{dispatch({type : '클릭'})}}>끄기</button>
 		</div>  : null
 
 	}
-	
-		
-	
-	{/* <div>avd</div> */}
-
-	
-
- 
-  
 </div>
 		</div>
 	)
 }
-// function stateProps(state){
-// 	console.log(state);
-// 	return {
-		
-// 		state : state.reducer,
-// 		alert보기 : state.reducer2
-		
-	
-// 	}
-// }
-// export default connect(stateProps)(Cart)
+
 export default Cart

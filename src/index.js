@@ -8,17 +8,13 @@ import {BrowserRouter} from 'react-router-dom'
 // redux 세팅
 import {Provider} from 'react-redux'
 import {combineReducers, createStore} from 'redux'
-
+import {confirmAlert} from 'react-confirm-alert';
 function reducer2(state=true,액션){
   if(액션.type === '클릭'){
     state = false;
   }
   return state;
-
-
 }
-
-
 
 let item_list = [];
 
@@ -57,17 +53,11 @@ function reducer (state = item_list, 액션){
   let found = copy.find(a =>a.id === 액션.payload.id
   );
   console.log("hi" + found.quan);
-  if(found.quan <=0 ){
-   let confirm = confirm("주문을 취소할까요?");
-   if(confirm ===true){
-    console.log("주문을 취소합니다.")
-   }else if (confirm===false){
-     console.log("창을 끄기")
-   }
+  if(found.quan <= 1 ){
+    alert("주문이 없습니다.")
   }else {
     found.quan--;
   }
-
     return copy
 }else if (액션.type === '주문취소'){
   let copy = [...state];
