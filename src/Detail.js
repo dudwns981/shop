@@ -21,6 +21,13 @@ let 제목 = styled.h4`
 
 function Detail(props) {
 
+  
+
+
+
+
+
+
   let [view, viewChange] = useState(true)
   let [inputData, inputData변경] = useState('')
   // tap 기능 만들기
@@ -51,12 +58,6 @@ function Detail(props) {
     // [] 빈칸이라면 페이지가 최초 렌더링 될때만 사용됨
   },[]);
 
-  // useEffect(()=>{
-  //   setTimeout(() => {
-  //     fade(true)
-  //   }, 5000);
-    
-  // })
 
 
 
@@ -66,11 +67,23 @@ function Detail(props) {
   const list = props.shoes;
   const 아이디= list.find(v=>v.id ===parseInt({id}.id));
 // 재고사본만들기
-
 let 재고 = useContext(재고cc)
-// console.log(재고)
 
-
+useEffect (()=>{
+  let arr = localStorage.getItem('watched');
+  if(arr===null){arr=[]}
+  else{  arr = JSON.parse(arr);}
+  arr.push(id);
+  arr = new Set(arr);
+  arr = [...arr];
+  localStorage.setItem('watched',JSON.stringify(arr));
+  function array (){
+    let abc = arr
+    return abc;
+  }
+},[])
+// let recent =JSON.parse(localStorage.getItem('watched'))
+// console.log(recent);
 
 
 
@@ -97,12 +110,12 @@ let 재고 = useContext(재고cc)
       
 
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-5">
           <img src={`https://codingapple1.github.io/shop/shoes${아이디.id +1}.jpg`}
           
           width="100%" />
         </div>
-        <div className="col-md-6 mt-4">
+        <div className="col-md-5 mt-4">
           <h4 className="pt-5">{props.shoes[아이디.id].title}</h4>
           <p>{props.shoes[아이디.id].content}</p>
           <p>{props.shoes[아이디.id].price}</p>
@@ -124,8 +137,18 @@ let 재고 = useContext(재고cc)
             history.goBack(); //경로로 이동 history.push('/경로')
           }}>뒤로가기</button> 
         </div>
+        <div className='col-md-2'>
+          <p>최근페이지</p>
+          {/* <div>{JSON.parse(localStorage.getItem('watched'))}</div> */}
+        
+        </div>
       </div>
+      
 
+          
+      <h2>최근본상품</h2>
+      <div>{}</div>
+{/* Nav Tap */}
         <Nav className="mt-5" variant="tabs" defaultActiveKey="/link-0">
       <Nav.Item>
         <Nav.Link onClick={()=>{tapSet(0);스위치변경(false)}} eventKey="link-0">
@@ -199,3 +222,11 @@ function stateProps(state){
 	
 	}
 }
+
+
+//  1. 누가 Detail 페이지 들어가면
+// 2. localstorage에 있는 항목을 꺼냄
+// 3. 경우가 두가지가 있다 null이 나오거나 [] 가 나오거나
+// 4. [] 가나오면 거기게 URL 파라미터의 id부분을 push() 함 (추가)
+// 5. 중복 처리하기
+// 6. 그러면 [] 를 localstorage에 저장함 (따옴표쳐서)

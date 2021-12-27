@@ -12,6 +12,8 @@ import Detail from "./Detail";
 import axios from "axios";
 import Cart from "./Cart";
 import Test from "./Test";
+import Nav__bar from "./component/Navbar";
+import Home from "./page/Home";
 export let 재고cc = React.createContext();
 
 // 같은 값을 공유하는 범위
@@ -23,46 +25,21 @@ function App() {
   let [load, loadSet] = useState(false);
   let [재고, 재고변경] = useState([10, 11, 12, 13, 14, 15]);
 
-  // const beta = [{12},{43}];
   return (
-
     <div className="App">
-      <Navbar bg="secondary" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">
-              Home
-            </Nav.Link>
-            <Nav.Link as={Link} to="/detail">
-              Detail
-            </Nav.Link>
-            <Nav.Link as={Link} to="/cart">
-              Cart
-            </Nav.Link>
-            <Nav.Link as={Link} to="/test">
-              test
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+
+{/* Navbar */}
+      <Nav__bar/>
 
       {/* switch는 컴포넌트가 중복매칭 되는것을 피하기 위해서, switch 내에서는 중복매칭이 발생하지 않는다 */}
-
       <Switch>
-        {/* HOME 화면 */}
+        {/* home 화면 */}
         <Route exact path="/">
-          <div className="background">
-            <h1>20% Season Off </h1>
-            <p>
-              This is a simple hero unit, a simple jumbotron-style component for
-              calling extra attention to featured content or information.
-            </p>
-            <p>
-              <Button variant="primary">Learn more</Button>
-            </p>
-          </div>
-            {/*  */}
+      <Home/>
+        </Route>
+        
+        {/* list 화면 */}
+        <Route exact path="/list">
           <재고cc.Provider value={재고}>
             <div className="container">
               <div className="row">
