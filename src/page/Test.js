@@ -4,7 +4,7 @@
 // 항목코드는 if문을 추가 이미 항목이 있다면 추가하기
 import React, {useEffect, useState, useContext, memo} from 'react'
 import { useParams } from 'react-router-dom';
-import {재고cc} from './App.js'
+import {재고cc} from '../App.js'
 
 const 스케줄 = {
 	note : <p>안녕하세요</p>,

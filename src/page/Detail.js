@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {useHistory, useParams} from 'react-router-dom'
 import styled from 'styled-components' 
 import './Detail.scss'
-import {재고cc} from './App.js'
+import {재고cc} from '../App.js'
 import { Nav, Link,Navbar, Container,Button} from 'react-bootstrap';
 import {CSSTransition} from "react-transition-group";
 import {connect} from 'react-redux'

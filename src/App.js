@@ -8,10 +8,10 @@ import { Nav, Navbar, Container, Button } from "react-bootstrap";
 import Data from "./data.js";
 import Price__list from "./Price__list";
 import { Link, Route, Switch } from "react-router-dom";
-import Detail from "./Detail";
+import Detail from "./page/Detail";
 import axios from "axios";
-import Cart from "./Cart";
-import Test from "./Test";
+import Cart from "./page/Cart";
+import Test from "./page/Test";
 import Nav__bar from "./component/Navbar";
 import Home from "./page/Home";
 export let 재고cc = React.createContext();
@@ -37,7 +37,7 @@ function App() {
         <Route exact path="/">
       <Home/>
         </Route>
-        
+
         {/* list 화면 */}
         <Route exact path="/list">
           <재고cc.Provider value={재고}>
@@ -80,11 +80,12 @@ function App() {
         </Route>
 
         <Route path="/cart">
-          <Cart></Cart>
+          <Cart/>
         </Route>
+        
         <재고cc.Provider value={재고}>
         <Route path="/test">
-          <Test></Test>
+          <Test/>
         </Route>
         </재고cc.Provider>
         
