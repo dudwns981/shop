@@ -14,6 +14,7 @@ import Cart from "./page/Cart";
 import Test from "./page/Test";
 import Nav__bar from "./component/Navbar";
 import Home from "./page/Home";
+import List from "./page/List";
 export let 재고cc = React.createContext();
 
 // 같은 값을 공유하는 범위
@@ -41,32 +42,7 @@ function App() {
         {/* list 화면 */}
         <Route exact path="/list">
           <재고cc.Provider value={재고}>
-            <div className="container">
-              <div className="row">
-                {shoes.map((a,i) => {return <Price__list shoes={a} i={i} key={i} />})}
-              </div>
-                {/* 로딩중 UI  */}
-              {load === true ? <Loading /> : null}
-              <button className="btn btn-primary" onClick={() => {
-                  loadSet(true);
-                  // axios 사용 데이터 불러오기
-                  setTimeout(() => {
-                    axios.get("https://codingapple1.github.io/shop/data2.json").then((result) => {
-                        loadSet(false);
-                        shoes변경([...shoes, ...result.data]);
-                      })
-                      // axios 에러처리
-                      .catch((error) => {
-                        loadSet(false);
-                        
-                        console.log("실패했어요 실패이유:" + error );
-                      });
-                  }, 1000);
-                }}
-              >
-                더보기
-              </button>
-            </div>
+          <List shoes={shoes} 재고={재고} 재고변경={재고변경} shoes변경={shoes변경} />
           </재고cc.Provider>
         </Route>
 
@@ -85,7 +61,7 @@ function App() {
         
         <재고cc.Provider value={재고}>
         <Route path="/test">
-          <Test/>
+          <Test />
         </Route>
         </재고cc.Provider>
         
@@ -99,11 +75,3 @@ function App() {
 
 export default App;
 
-function Loading() {
-  return (
-    <>
-      <div>로딩중입니다!</div>
-      <h3>안녕하세요!</h3>
-    </>
-  );
-}

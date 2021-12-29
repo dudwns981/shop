@@ -13,6 +13,8 @@ function Cart(props) {
 	const totalquan = state.map(a => a.quan).reduce((prev,curr)=>prev+curr,0);
 	return (
 		<div>
+			<div>공백</div>
+			<h1>장바구니</h1>
 			<div>
   <Table responsive="sm">
     <thead>

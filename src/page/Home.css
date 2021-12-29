@@ -1,0 +1,109 @@
+div{
+	box-sizing: border-box;
+}
+body{
+	margin: 0px;
+}
+li, a{ text-decoration : none}
+
+.home{
+	background:
+}
+
+.main-background{
+	text-align: center;
+	width : 100%;
+	height: 600px;
+	background-image: url("https://balenciaga.dam.kering.com/m/6f44fc097b013d1c/Large-05_Bal-com-HP_Christmas-Gifting_2200x1100px_No-Logo_3.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	/* background-attachment: fixed; */
+	/* filter: brightness(60%); */
+	padding: 1px;
+	position: relative;
+	
+}
+.main-title{
+	color: white;
+	font-size: 40px;
+	margin-left: 30px;
+	margin-top: 100px;
+}
+.main-phrases{
+	margin-left: 30px;
+	font-size: 20px;
+	margin-right: 70px;
+}
+/* background button */
+body:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+.main-button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+	position: relative;
+	/* top: 50px; */
+}
+.main-button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.main-button:before,.main-button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.main-button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.main-button:hover:before,.main-button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+.box{
+	width: 180%;
+	max-width: 600px;
+	height: 250px;
+	background-color: whitesmoke;
+	padding: 30px;
+	text-align: center;
+	position: relative;	
+	left: 0;
+	right: 0;
+	margin: auto;
+	top: -80px;
+	z-index: 3;
+	
+}
+
+.sub__content{
+	width: 100%;
+	height: 600px;
+	background-image: url("https://balenciaga.dam.kering.com/m/26d734adf8894a13/Large-210622_BALENCIAGA_ALWAYS_ON_CAGOLE_G_1.jpg");
+	position: relative;
+	top: -130px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
