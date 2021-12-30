@@ -1,0 +1,26 @@
+.list{
+	width: 500px;
+	/* margin: 0px auto; */
+	position: relative;
+	
+}
+
+
+
+.list1{
+	position: relative;
+	top:0px;
+	left:0x;
+}
+.list2{
+	display: none;
+	top: 0px;
+	left: 0px;
+}
+.list:hover img:first-child{display: none;}
+.list:hover img:last-child{display: inline;}
+
+.color{
+
+	background-color: #F4F4F6;
+}

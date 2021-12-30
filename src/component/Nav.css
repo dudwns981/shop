@@ -11,16 +11,18 @@ li, a, ul { text-decoration : none}
 .navbar{
 	position: fixed;
 	width: 100%;
-	height: 70px;
+	height: 140px;
 	display:flex;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	background-color: white;
-	align-items: center;
+	/* align-items: center; */
 	color: var(--color-white);
+	/* margin-left: 80px; */
 	padding: 16px;
-	transition: all var(--animation-duration) ease-in-out;
-	z-index: 1;
-	top:-20px
+	z-index: 5;
+	top:0.001px;
+	border: 1px solid black;
+
 }
 
 .navbar__logo{
@@ -31,15 +33,20 @@ li, a, ul { text-decoration : none}
 
 }
 .navbar__menu{
+	position: fixed;
+	left: 1450px;
 	margin-top: 20px;
-	display: flex;
+	/* margin-right: 30px; */
+	/* display: flex; */
 	font-weight: bold;
+	
+	
 }
-.category{
+/* .category{
 	position: relative;
-	right: 150px;
+	right: 200px;
 	padding-left: 0px;
-}
+} */
 .category>*{
 	color: #767676;
 	
@@ -82,3 +89,30 @@ li, a, ul { text-decoration : none}
 .navbar__white a {
 	color: black;
 } */
+
+
+.category{
+	width: 100%;
+	height: 60px;
+	margin-top: 0px;
+	padding-top: 10px;
+	position: fixed;
+	z-index: 3;
+	background-color: white;
+	border: 1px solid black;
+	display: block;
+	transition: all 1s ease-in-out;
+	transition-timing-function: linear
+
+ 
+}
+.category__list{
+	margin-bottom: 0px;
+}
+.category__list>a{
+	
+	font-size: 25px;
+	color: black;
+	margin-left: 50px;
+	font-weight: bold;
+}

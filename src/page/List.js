@@ -11,8 +11,8 @@ function List(props) {
 
 
 	return (
-		<div className="container">
-		<div className="row">
+		<div className="container" style={{marginLeft:"0px"}}>
+		<div className="row" style={{width:"1800px"}}>
 			{props.shoes.map((a,i) => {return <Price__list shoes={a} i={i} key={i} />})}
 		</div>
 			{/* 로딩중 UI  */}
@@ -21,8 +21,9 @@ function List(props) {
 				loadSet(true);
 				// axios 사용 데이터 불러오기
 				setTimeout(() => {
-					axios.get("https://codingapple1.github.io/shop/data2.json").then((result) => {
+					axios.get("https://dudwns981.github.io/data/DATA.json").then((result) => {
 							loadSet(false);
+							console.log(result.data)
 							props.shoes변경([...props.shoes, ...result.data]);
 						})
 						// axios 에러처리

@@ -4,7 +4,7 @@ function Home() {
     return (
         <div className='home'>
 
-            <div className="main-background">
+            <div className="home__pt content1">
                 {/* <h1 className="main-title">Come and check out our buyer’s paradise!
                     </h1>
                     <p className="main-phrases">A phrase used by a famous French cosmetic company
@@ -23,7 +23,9 @@ function Home() {
                 <button className="main-button">Get Start</button>
             </div>
 
-            <div className='sub__content'></div>
+            <div className='home__pt content2'></div>
+            <div className='home__pt content3'></div>
+            
         </div>
     )
 }

@@ -111,7 +111,7 @@ useEffect (()=>{
 
       <div className="row">
         <div className="col-md-5">
-          <img src={`https://codingapple1.github.io/shop/shoes${아이디.id +1}.jpg`}
+          <img src={`https://dudwns981.github.io/data/men/${아이디.id}.jpg`}
           
           width="100%" />
         </div>

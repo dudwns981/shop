@@ -25,13 +25,23 @@ function App() {
   let [shoes, shoes변경] = useState(Data);
   let [load, loadSet] = useState(false);
   let [재고, 재고변경] = useState([10, 11, 12, 13, 14, 15]);
+  let [show,setShow] = useState(true)
+
+  const navbarscroll = () =>{
+    if(window.scrollY > 100){
+      setShow(false);
+    }else{
+      setShow(true);
+    }
+    
+  } 
+
 
   return (
     <div className="App">
 
 {/* Navbar */}
       <Nav__bar/>
-
       {/* switch는 컴포넌트가 중복매칭 되는것을 피하기 위해서, switch 내에서는 중복매칭이 발생하지 않는다 */}
       <Switch>
         {/* home 화면 */}
@@ -41,6 +51,7 @@ function App() {
 
         {/* list 화면 */}
         <Route exact path="/list">
+          {/* <Ad/> */}
           <재고cc.Provider value={재고}>
           <List shoes={shoes} 재고={재고} 재고변경={재고변경} shoes변경={shoes변경} />
           </재고cc.Provider>
